@@ -1,6 +1,6 @@
 # AntiGravity 2 懶人包
 
-給研發人員與初學者使用的十五個專案層級 Skills。每個主題獨立、按需載入，不把 Codex、Claude 或 OpenCode 的專用設定帶進 AntiGravity 2。
+給研發人員與初學者使用的十六個專案層級 Skills。每個主題獨立、按需載入，不把 Codex、Claude 或 OpenCode 的專用設定帶進 AntiGravity 2。
 
 ## 使用
 
@@ -10,7 +10,7 @@ Set-Location .\antigravity-starter-packs
 agy
 ```
 
-輸入 `/skills` 應看到十五個技能。只選當下任務需要的技能，不要一次安裝所有外部服務。
+輸入 `/skills` 應看到十六個技能。只選當下任務需要的技能，不要一次安裝所有外部服務。
 
 ## 主題
 
@@ -31,6 +31,7 @@ agy
 | 11 | `11-workspace` | 專案初始化 |
 | 12 | `12-draw` | 生圖工作流 |
 | 13 | `13-chezmoi` | 安全同步設定 |
+| 14 | `14-vercel` | Vercel CLI／MCP 與測試部署 |
 
 ## 共通安全線
 

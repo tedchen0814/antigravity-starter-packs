@@ -12,6 +12,9 @@ credentials.*
 .claude/
 .codex/
 
+# Vercel 本機連結
+.vercel/
+
 # Node.js
 node_modules/
 package-lock.json
