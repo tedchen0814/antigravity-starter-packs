@@ -1,16 +1,27 @@
 # AntiGravity 2 懶人包
 
-給研發人員與初學者使用的十六個專案層級 Skills。每個主題獨立、按需載入，不把 Codex、Claude 或 OpenCode 的專用設定帶進 AntiGravity 2。
+給研發人員與初學者使用的十六個 Skills，安裝到**全域**技能資料夾（`~\.gemini\config\skills\`），在任何資料夾開啟 AntiGravity 2 都能用。每個主題獨立，不把 Codex、Claude 或 OpenCode 的專用設定帶進 AntiGravity 2。
 
-## 使用
+## 安裝
 
 ```powershell
 git clone https://github.com/tedchen0814/antigravity-starter-packs.git
 Set-Location .\antigravity-starter-packs
-agy
+$dest = Join-Path $HOME '.gemini\config\skills'
+New-Item -ItemType Directory -Force $dest | Out-Null
+Get-ChildItem .\.agents\skills -Directory | ForEach-Object {
+  $target = Join-Path $dest $_.Name
+  if (Test-Path $target) { Remove-Item -Recurse -Force $target }
+  Copy-Item -Recurse $_.FullName $target
+  Write-Host "已安裝 $($_.Name) -> $target"
+}
 ```
 
-輸入 `/skills` 應看到十六個技能。只選當下任務需要的技能，不要一次安裝所有外部服務。
+- 同名的舊版會被覆蓋；之後更新 repo，重跑一次即可。
+- 裝完**重新啟動 AntiGravity**（`agy`），在任何資料夾輸入 `/skills`，應看到十六個技能。
+- 若 `/skills` 沒有出現這十六個，請確認 `~\.gemini\config\skills\` 底下有各技能資料夾，且每個資料夾內有 `SKILL.md`。
+- 在本 repo 資料夾內開啟時，`.agents/skills/` 的專案技能優先於全域同名技能。
+- 全域技能會在每個專案的每個對話載入名稱與說明；只選當下任務需要的技能使用，不要一次安裝所有外部服務。
 
 ## 主題
 
