@@ -8,6 +8,17 @@
 
 **這一步不會**安裝任何軟體、不登入任何服務、不修改 MCP 設定。真正的設定與安裝，是安裝完成後在新對話裡由 `00-install-all` 導覽，一次一項、逐項徵求同意。
 
+## 讀取這份說明時的提醒
+
+Windows PowerShell 5.1 用 `Invoke-WebRequest` 抓 `raw.githubusercontent.com` 的檔案，中文常會變亂碼。讀到亂碼就改用 UTF-8 解碼重抓，例如：
+
+```powershell
+$r = Invoke-WebRequest https://raw.githubusercontent.com/tedchen0814/antigravity-starter-packs/main/INSTALL.md -UseBasicParsing
+[Text.Encoding]::UTF8.GetString($r.RawContentStream.ToArray())
+```
+
+不要根據亂碼的內容行動。
+
 ## 步驟
 
 1. **先說明並等同意。** 告訴使用者：「我要把 16 份技能手冊複製到你電腦的 AntiGravity 技能資料夾，不會安裝軟體或登入任何東西。要繼續嗎？」收到同意才動手。

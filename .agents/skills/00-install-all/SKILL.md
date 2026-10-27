@@ -92,7 +92,9 @@ description: 懶人包導覽與狀態盤點（編號 00A）。使用者說「開
 **只檢查、不安裝、不登入、不修改任何東西。**
 
 1. 檢查全域技能資料夾 `~\.gemini\config\skills\` 內有哪些技能，是否齊全。
-2. 唯讀檢查環境，逐項回報版本或「未安裝」：`agy --version`、`git --version`、`gh --version`、`node --version`、`npm --version`、`uv --version`。
+2. 唯讀檢查環境，逐項回報版本或「未安裝」：`agy --version`、`git --version`、`gh --version`、`node --version`、`npm --version`、`uv --version`、`vercel.cmd --version`。
+   - **Windows 上 npm 全域工具要用 `.cmd` 檢查**（例如 `vercel.cmd`、`firebase.cmd`）：公司或群組原則常擋未簽章的 `.ps1`，直接打 `vercel` 會失敗，看起來像「沒裝」，其實有裝。
+   - 找不到時，不要直接寫「未安裝」；先用 `Get-Command <名稱>` 與 `.cmd` 版各查一次。仍找不到，才寫「在這個執行環境找不到（可能是 PATH 不同）」，並請使用者在自己的 PowerShell 確認。`agy` 也一樣：你正在 AntiGravity 裡執行，找不到只代表指令不在 PATH，不是沒裝。
 3. `gh auth status` 只看是否登入。**這個結果可能是誤判**：執行環境有時讀不到系統憑證庫。失敗時只能寫「無法確認 GitHub 登入狀態」，請使用者在自己的 PowerShell 執行 `gh auth status` 確認；不要說 token 無效，也不要建議重新登入。
 4. 列出 `mcp_config.json` 裡已有的 MCP **名稱**（只列名稱，不顯示任何 key、token 或網址參數）。
 5. 不要讀取任何憑證檔。
