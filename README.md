@@ -13,9 +13,11 @@
 https://raw.githubusercontent.com/tedchen0814/antigravity-starter-packs/main/INSTALL.md
 ```
 
-它會先說明要做什麼、等你同意，再把 16 份技能手冊複製到全域技能資料夾（**不需要先安裝 Git**，不會安裝軟體、不會登入任何東西）。裝完請**關閉並重新開啟 AntiGravity**，開新對話輸入「**開始**」，它會問你想做什麼，再一步一步帶你設定，一次只做一項。
+它會先說明要做什麼、等你同意，再把 16 份技能手冊複製到全域技能資料夾（**這一步不需要 Git**，不會安裝軟體、不會登入任何東西）。裝完請**關閉並重新開啟 AntiGravity**，開新對話輸入「**開始**」，它會問你想做什麼，再一步一步帶你設定，一次只做一項。**開始安裝任何項目之前，它會先請你安裝 Git**（版本控制工具，後續幾乎都會用到；經你同意才裝）。
 
 ### 進階：手動安裝（PowerShell）
+
+沒有 Git 時，可在 GitHub 頁面按 **Code → Download ZIP**，解壓縮後在資料夾內執行下面的複製段落（略過 `git clone` 與 `Set-Location` 兩行）。
 
 ```powershell
 git clone https://github.com/tedchen0814/antigravity-starter-packs.git
@@ -41,7 +43,7 @@ Get-ChildItem .\.agents\skills -Directory | ForEach-Object {
 
 | 編號 | 技能 | 用途 |
 |---|---|---|
-| 00 | `00-env-setup` | 環境快篩 |
+| 00 | `00-env-setup` | 環境準備：確認並補裝 Git、Node.js、uv（Git 是後續所有項目的前置） |
 | 00A | `00-install-all` | 導覽與狀態盤點：先問你想做什麼，只檢查、不自動安裝 |
 | 01 | `01-notebooklm` | NotebookLM 連接規劃 |
 | 02 | `02-essentials` | 新手必要工具 |
@@ -57,6 +59,24 @@ Get-ChildItem .\.agents\skills -Directory | ForEach-Object {
 | 12 | `12-draw` | 生圖工作流 |
 | 13 | `13-chezmoi` | 安全同步設定 |
 | 14 | `14-vercel` | Vercel CLI／MCP 與測試部署 |
+
+## 先備條件
+
+- [ ] AntiGravity 2 已安裝並能登入
+- [ ] 電腦有網路連線
+- [ ] Windows 使用 PowerShell
+
+## 常見問題與復原
+
+| 問題 | 解法 |
+|---|---|
+| 輸入「開始」沒反應 | 改說「導覽」或「懶人包」；仍沒有就輸入 `/skills` 確認 `00-install-all` 是否在清單中 |
+| 裝完技能卻沒出現 | 完全關閉 AntiGravity 再重開，並開**新的對話** |
+| 想還原被覆蓋的舊技能 | 舊版在 `~\.gemini\config\skills-backup\<日期時間>\`，把對應資料夾搬回 `~\.gemini\config\skills\` |
+| 想還原 MCP 設定 | 改設定前會先備份成 `mcp_config.json.bak-<日期時間>`（`~\.gemini\config\` 與 `~\.gemini\antigravity\` 兩處），複製回原檔名即可 |
+| 想移除某個技能 | 刪掉 `~\.gemini\config\skills\` 底下對應的資料夾，再重開 AntiGravity |
+| 直接打 `vercel`、`firebase` 指令失敗（Windows） | 改打 `vercel.cmd`、`firebase.cmd`；公司或群組原則常擋未簽章的 `.ps1` |
+| AntiGravity 說某檔案「不存在」但你確定存在 | 它的沙箱檔案視圖可能和實際不同，請在自己的 PowerShell 確認，不要因此重裝 |
 
 ## 共通安全線
 
