@@ -4,20 +4,34 @@
 
 ## 安裝
 
+### 最簡單：貼一句給 AntiGravity
+
+把下面這段貼給 AntiGravity：
+
+```
+請讀這份安裝說明，依它帶我安裝：
+https://raw.githubusercontent.com/tedchen0814/antigravity-starter-packs/main/INSTALL.md
+```
+
+它會先說明要做什麼、等你同意，再把 16 份技能手冊複製到全域技能資料夾（**不需要先安裝 Git**，不會安裝軟體、不會登入任何東西）。裝完請**關閉並重新開啟 AntiGravity**，開新對話輸入「**開始**」，它會問你想做什麼，再一步一步帶你設定，一次只做一項。
+
+### 進階：手動安裝（PowerShell）
+
 ```powershell
 git clone https://github.com/tedchen0814/antigravity-starter-packs.git
 Set-Location .\antigravity-starter-packs
 $dest = Join-Path $HOME '.gemini\config\skills'
+$backup = Join-Path $HOME ".gemini\config\skills-backup\$(Get-Date -Format yyyyMMdd-HHmmss)"
 New-Item -ItemType Directory -Force $dest | Out-Null
 Get-ChildItem .\.agents\skills -Directory | ForEach-Object {
   $target = Join-Path $dest $_.Name
-  if (Test-Path $target) { Remove-Item -Recurse -Force $target }
+  if (Test-Path $target) { New-Item -ItemType Directory -Force $backup | Out-Null; Move-Item $target $backup }
   Copy-Item -Recurse $_.FullName $target
   Write-Host "已安裝 $($_.Name) -> $target"
 }
 ```
 
-- 同名的舊版會被覆蓋；之後更新 repo，重跑一次即可。
+- 同名的舊版會先搬到 `~\.gemini\config\skills-backup\<日期時間>\`，不會直接刪除；之後更新 repo，重跑一次即可。
 - 裝完**重新啟動 AntiGravity**（`agy`），在任何資料夾輸入 `/skills`，應看到十六個技能。
 - 若 `/skills` 沒有出現這十六個，請確認 `~\.gemini\config\skills\` 底下有各技能資料夾，且每個資料夾內有 `SKILL.md`。
 - 在本 repo 資料夾內開啟時，`.agents/skills/` 的專案技能優先於全域同名技能。
@@ -28,7 +42,7 @@ Get-ChildItem .\.agents\skills -Directory | ForEach-Object {
 | 編號 | 技能 | 用途 |
 |---|---|---|
 | 00 | `00-env-setup` | 環境快篩 |
-| 00A | `00-install-all` | 全包檢查清單，不自動大量安裝 |
+| 00A | `00-install-all` | 導覽與狀態盤點：先問你想做什麼，只檢查、不自動安裝 |
 | 01 | `01-notebooklm` | NotebookLM 連接規劃 |
 | 02 | `02-essentials` | 新手必要工具 |
 | 03 | `03-github` | GitHub CLI |
