@@ -41,6 +41,8 @@ uv tool install --force notebooklm-mcp-cli
 
 不要因登入失敗反覆重裝。
 
+若安裝時出現 `Missing expected target directory for Python minor version link`，是 uv 的 Python 捷徑（junction）損壞，與 NotebookLM 無關。先說明並取得同意，再用 `cmd /c rmdir` 刪掉 `%APPDATA%Vpython` 底下損壞的捷徑（不要用一般刪除，避免連目標一起刪），然後加上 `--python 3.12` 重裝：`uv tool install --force --python 3.12 notebooklm-mcp-cli`。
+
 ### 3. 可視登入交接
 
 若 `authValid` 為 false，禁止在 AntiGravity 背景、headless 或 sandbox terminal 中反覆執行 `nlm login`。請使用者在一般、可見的 PowerShell 視窗親自執行：
