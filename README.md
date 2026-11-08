@@ -80,7 +80,7 @@ Get-ChildItem .\.agents\skills -Directory | ForEach-Object {
 
 ## 共通安全線
 
-- Windows 指令使用 PowerShell。
+- Windows 指令使用 PowerShell。讀取或輸出中文出現亂碼（CP950）時，先在該 PowerShell 設定 `$env:PYTHONUTF8 = '1'` 與 `[Console]::OutputEncoding = [Text.Encoding]::UTF8`，不要因此重裝或清除登入資料。
 - 先檢查版本與登入狀態，不直接重裝。
 - API key、OAuth token、Cookie、個人資料不進 repo 或對話輸出。
 - MCP、Browser、CLI 先唯讀驗證；寫入、公開、刪除前取得確認。
